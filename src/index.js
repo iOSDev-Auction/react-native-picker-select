@@ -517,6 +517,7 @@ export default class RNPickerSelect extends PureComponent {
         return (
             <View style={[defaultStyles.viewContainer, style.viewContainer]}>
                 <Picker
+                    ref={(ref) => (this['pickerRef'] = ref)}
                     style={[
                         Icon ? { backgroundColor: 'transparent' } : {}, // to hide native icon
                         style.inputAndroid,
