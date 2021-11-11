@@ -114,7 +114,6 @@ export default class RNPickerSelect extends PureComponent {
 
     constructor(props) {
         super(props);
-
         const items = RNPickerSelect.handlePlaceholder({
             placeholder: props.placeholder,
         }).concat(props.items);
@@ -240,6 +239,7 @@ export default class RNPickerSelect extends PureComponent {
         if (!showPicker) {
             Keyboard.dismiss();
         }
+
         if (this['pickerRef'] && Platform.OS == 'android') this.pickerRef.focus();
         const animationType =
             modalProps && modalProps.animationType ? modalProps.animationType : 'slide';
@@ -480,7 +480,6 @@ export default class RNPickerSelect extends PureComponent {
             fixAndroidTouchableBug,
         } = this.props;
         const { selectedItem } = this.state;
-
         const Component = fixAndroidTouchableBug ? View : TouchableOpacity;
         return (
             <Component
@@ -492,6 +491,7 @@ export default class RNPickerSelect extends PureComponent {
                 <View style={style.headlessAndroidContainer}>
                     {this.renderTextInputOrChildren()}
                     <Picker
+                        ref={(ref) => (this['pickerRef'] = ref)}
                         style={[
                             Icon ? { backgroundColor: 'transparent' } : {}, // to hide native icon
                             defaultStyles.headlessAndroidPicker,
@@ -513,7 +513,6 @@ export default class RNPickerSelect extends PureComponent {
     renderAndroidNativePickerStyle() {
         const { disabled, Icon, style, pickerProps } = this.props;
         const { selectedItem } = this.state;
-
         return (
             <View style={[defaultStyles.viewContainer, style.viewContainer]}>
                 <Picker
@@ -556,7 +555,6 @@ export default class RNPickerSelect extends PureComponent {
             </View>
         );
     }
-
     render() {
         const { children, useNativeAndroidPickerStyle } = this.props;
 
