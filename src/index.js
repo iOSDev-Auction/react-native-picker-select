@@ -57,6 +57,7 @@ export default class RNPickerSelect extends PureComponent {
         // Custom Icon
         Icon: PropTypes.func,
         InputAccessoryView: PropTypes.func,
+        onBackdropPress: PropTypes.func,
     };
 
     static defaultProps = {
@@ -85,6 +86,7 @@ export default class RNPickerSelect extends PureComponent {
         touchableWrapperProps: {},
         Icon: null,
         InputAccessoryView: null,
+        onBackdropPress: () => { },
     };
 
     static handlePlaceholder({ placeholder }) {
@@ -413,7 +415,7 @@ export default class RNPickerSelect extends PureComponent {
     }
 
     renderIOS() {
-        const { style, modalProps, pickerProps, touchableWrapperProps } = this.props;
+        const { style, modalProps, pickerProps, touchableWrapperProps, onBackdropPress } = this.props;
         const { animationType, orientation, selectedItem, showPicker } = this.state;
 
         return (
@@ -442,6 +444,7 @@ export default class RNPickerSelect extends PureComponent {
                         testID="ios_modal_top"
                         onPress={() => {
                             this.togglePicker(true);
+                            onBackdropPress();
                         }}
                     />
                     {this.renderInputAccessoryView()}
